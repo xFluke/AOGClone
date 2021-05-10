@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barbarian
       objectReference: {fileID: 0}
+    - target: {fileID: 3472835526908050075, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 15b8340e983c03642a02918c3fcd0ad1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
 --- !u!1 &7611456176382843166 stripped
@@ -521,3 +525,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb76673071152a34b92534660068bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: []
