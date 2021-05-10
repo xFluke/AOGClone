@@ -9,9 +9,6 @@ public class Tile : MonoBehaviour
     [SerializeField] int y;
 
     bool highlighted = false;
-    
-    [SerializeField] bool walkable = true;
-    public bool Walkable {  get { return walkable; } }
 
     Material originalMaterial;
 
@@ -21,17 +18,18 @@ public class Tile : MonoBehaviour
     public int gCost;
     public int hCost;
     public Tile parent;
-
     public int fCost {
         get { return gCost + hCost; }
+    }
+    [SerializeField] bool walkable = true;
+    public bool Walkable { get { return walkable; } }
+
+    private void Awake() {
+        onTileSelected.AddListener(FindObjectOfType<GameManager>().SelectTile);
     }
 
     private void Start() {
         originalMaterial = GetComponent<MeshRenderer>().material;
-    }
-
-    private void Update() {
-        
     }
 
     public void SetCoordinate(int _x, int _y) {
@@ -61,18 +59,6 @@ public class Tile : MonoBehaviour
     private void OnMouseDown() {
         if (!highlighted) return;
 
-        Debug.Log("Clicked on " + this.name);
-
-        //List<Tile> neighbours = FindObjectOfType<Grid>().GetNeighbourTiles(this);
-        //foreach (var item in neighbours) {
-        //    Debug.Log(item.name);
-        //}
-
-        //onTileSelected.Invoke(this);
-
-        Unit player = FindObjectOfType<Unit>();
-        List<Tile> path = FindObjectOfType<Pathfinding>().FindPath(FindObjectOfType<Grid>().GetTileAt(player.X, player.Y), this);
-        Debug.Log(path);
-        FindObjectOfType<UnitMovement>().SetPath(path);
+        onTileSelected.Invoke(this);
     }
 }

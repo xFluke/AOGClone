@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Unit currentlySelectedUnit;
-    [SerializeField] Unit lastSelectedUnit;
 
     Grid grid;
 
@@ -14,20 +13,30 @@ public class GameManager : MonoBehaviour
     }
 
     public void SelectUnit(Unit unit) {
-        currentlySelectedUnit = unit;
-
         // If clicked on the same unit
-        if (currentlySelectedUnit == lastSelectedUnit) {
+        if (currentlySelectedUnit == unit) {
             grid.UnhighlightTiles();
+
+            currentlySelectedUnit = null;
         }
         else {
             grid.HighlightUnitWalkableAreas(unit.X, unit.Y, unit.MoveDistance);
+            currentlySelectedUnit = unit;
         }
-
-        lastSelectedUnit = currentlySelectedUnit;
     }
 
-    public void MoveUnit(Tile targetTile) {
-        currentlySelectedUnit.SetDestination(targetTile.GetCoordinates());
+    public void SelectTile(Tile tileSelected) {
+
+        // Move selected unit to target tile
+        if (currentlySelectedUnit != null) {
+            Tile tileUnitIsOn = FindObjectOfType<Grid>().GetTileAt(currentlySelectedUnit.X, currentlySelectedUnit.Y);
+
+            if (tileUnitIsOn != tileSelected) {
+                List<Tile> path = FindObjectOfType<Pathfinding>().FindPath(tileUnitIsOn, tileSelected);
+                currentlySelectedUnit.GetComponent<UnitMovement>().SetPath(path);
+
+                grid.UnhighlightTiles();
+            }
+        }
     }
 }

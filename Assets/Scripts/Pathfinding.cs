@@ -10,6 +10,7 @@ public class Pathfinding : MonoBehaviour
         grid = GetComponent<Grid>();
     }
 
+    // A* pathfinding 
     public List<Tile> FindPath(Tile startingTile, Tile targetTile) {
         Debug.Log("Starting Tile: " + startingTile.name);
         Debug.Log("Target Tile: " + targetTile.name);

@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlySelectedUnit: {fileID: 0}
-  lastSelectedUnit: {fileID: 0}
 --- !u!1 &699089812
 GameObject:
   m_ObjectHideFlags: 0
