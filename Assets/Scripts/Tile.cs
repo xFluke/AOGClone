@@ -15,9 +15,12 @@ public class Tile : MonoBehaviour
     public UnityEvent<Tile> onTileSelected;
 
     // For Pathfinding
-    public int gCost;
-    public int hCost;
-    public Tile parent;
+    [HideInInspector] public int gCost;
+    [HideInInspector] public int hCost;
+    public int costModifier;
+    [HideInInspector] public Tile parent;
+
+
     public int fCost {
         get { return gCost + hCost; }
     }
@@ -29,6 +32,8 @@ public class Tile : MonoBehaviour
     }
 
     private void Start() {
+        FindObjectOfType<Grid>().SetTileAt(x, y, this);
+
         originalMaterial = GetComponent<MeshRenderer>().material;
     }
 
@@ -54,6 +59,7 @@ public class Tile : MonoBehaviour
 
     public void UnhighlightTile() {
         GetComponent<MeshRenderer>().material = originalMaterial;
+        highlighted = false;
     }
 
     private void OnMouseDown() {

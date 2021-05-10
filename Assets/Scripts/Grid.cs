@@ -16,11 +16,11 @@ public class Grid : MonoBehaviour
     List<Tile> highlightedTiles;
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         grid = new Tile[xSize, ySize];
         highlightedTiles = new List<Tile>();
 
-        GenerateGrid();
+        //GenerateGrid();
     }
 
     private void GenerateGrid() {
@@ -48,6 +48,8 @@ public class Grid : MonoBehaviour
                     continue;
 
                 if ((Mathf.Abs(tileX - unitX) + Mathf.Abs(tileY - unitY)) <= unitMoveDistance) {
+                    if (!grid[tileX, tileY])
+                        continue;
                     grid[tileX, tileY].HighlightTile(true);
                     highlightedTiles.Add(grid[tileX, tileY]);
                 }
@@ -86,5 +88,9 @@ public class Grid : MonoBehaviour
 
     public Tile GetTileAt(int x, int y) {
         return grid[x, y];
+    }
+
+    public void SetTileAt(int x, int y, Tile tile) {
+        grid[x, y] = tile;
     }
 }

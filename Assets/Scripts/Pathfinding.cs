@@ -36,6 +36,9 @@ public class Pathfinding : MonoBehaviour
             }
 
             foreach (Tile neighbour in grid.GetNeighbourTiles(currentTile)) {
+                if (!neighbour)
+                    continue;
+
                 if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
                     continue;
                 }
@@ -54,8 +57,38 @@ public class Pathfinding : MonoBehaviour
             }
         }
 
-        Debug.Log("Returning empty path");
+        Debug.Log("Could not find a path");
         return new List<Tile>();
+    }
+
+    void FindAvailableTiles(Tile startingTile) {
+        //idk wtf im doing w this yet
+
+        //List<Tile> openSet = new List<Tile>();
+        //HashSet<Tile> closedSet = new HashSet<Tile>();
+        //openSet.Add(startingTile);
+
+        //Tile currentTile = openSet[0];
+
+        //foreach (Tile neighbour in grid.GetNeighbourTiles(currentTile)) {
+        //    if (!neighbour)
+        //        continue;
+
+        //    if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
+        //        continue;
+        //    }
+
+        //    int movementCostToNeighbour = currentTile.gCost + GetDistance(currentTile, neighbour) + neighbour.costModifier;
+
+        //    if (movementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
+        //        neighbour.gCost = movementCostToNeighbour;
+        //        neighbour.hCost = GetDistance(neighbour, targetTile);
+
+        //        if (!openSet.Contains(neighbour)) {
+        //            openSet.Add(neighbour);
+        //        }
+        //    }
+        //}
     }
 
     List<Tile> RetracePath(Tile startTile, Tile endTile) {
@@ -83,4 +116,6 @@ public class Pathfinding : MonoBehaviour
             return 14 * distanceX + 10 * (distanceY - distanceX);
         }
     }
+
+    
 }
