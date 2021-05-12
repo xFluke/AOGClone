@@ -21,11 +21,11 @@ public class Pathfinding : MonoBehaviour
 
         while (openSet.Count > 0) {
             Tile currentTile = openSet[0];
-            for (int i = 1; i < openSet.Count; i++) {
-                if (openSet[i].fCost < currentTile.fCost || openSet[i].fCost == currentTile.fCost && openSet[i].hCost < currentTile.hCost) {
-                    currentTile = openSet[i];
-                }
-            }
+            //for (int i = 1; i < openSet.Count; i++) {
+            //    if (openSet[i].fCost < currentTile.fCost || openSet[i].fCost == currentTile.fCost && openSet[i].hCost < currentTile.hCost) {
+            //        currentTile = openSet[i];
+            //    }
+            //}
 
             openSet.Remove(currentTile);
             closedSet.Add(currentTile);
@@ -43,7 +43,7 @@ public class Pathfinding : MonoBehaviour
                     continue;
                 }
 
-                int newMovementCostToNeighbour = currentTile.gCost + GetDistance(currentTile, neighbour);
+                int newMovementCostToNeighbour = currentTile.gCost + GetDistance(currentTile, neighbour) + neighbour.costModifier;
 
                 if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
                     neighbour.gCost = newMovementCostToNeighbour;
@@ -53,6 +53,8 @@ public class Pathfinding : MonoBehaviour
                     if (!openSet.Contains(neighbour)) {
                         openSet.Add(neighbour);
                     }
+
+                    
                 }
             }
         }
@@ -61,35 +63,7 @@ public class Pathfinding : MonoBehaviour
         return new List<Tile>();
     }
 
-    void FindAvailableTiles(Tile startingTile) {
-        //idk wtf im doing w this yet
-
-        //List<Tile> openSet = new List<Tile>();
-        //HashSet<Tile> closedSet = new HashSet<Tile>();
-        //openSet.Add(startingTile);
-
-        //Tile currentTile = openSet[0];
-
-        //foreach (Tile neighbour in grid.GetNeighbourTiles(currentTile)) {
-        //    if (!neighbour)
-        //        continue;
-
-        //    if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
-        //        continue;
-        //    }
-
-        //    int movementCostToNeighbour = currentTile.gCost + GetDistance(currentTile, neighbour) + neighbour.costModifier;
-
-        //    if (movementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
-        //        neighbour.gCost = movementCostToNeighbour;
-        //        neighbour.hCost = GetDistance(neighbour, targetTile);
-
-        //        if (!openSet.Contains(neighbour)) {
-        //            openSet.Add(neighbour);
-        //        }
-        //    }
-        //}
-    }
+    
 
     List<Tile> RetracePath(Tile startTile, Tile endTile) {
         List<Tile> path = new List<Tile>();
@@ -117,5 +91,13 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
-    
+    public int GetCostOfPath(List<Tile> path) {
+        int cost = 0;
+
+        foreach (Tile tile in path) {
+            cost += 1 + tile.costModifier;
+        }
+
+        return cost;
+    }
 }

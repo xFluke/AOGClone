@@ -15,14 +15,13 @@ public class Tile : MonoBehaviour
     public UnityEvent<Tile> onTileSelected;
 
     // For Pathfinding
-    [HideInInspector] public int gCost;
-    [HideInInspector] public int hCost;
+     public int gCost;
+    public int hCost;
     public int costModifier;
     [HideInInspector] public Tile parent;
 
-
     public int fCost {
-        get { return gCost + hCost; }
+        get { return gCost + hCost + costModifier; }
     }
     [SerializeField] bool walkable = true;
     public bool Walkable { get { return walkable; } }

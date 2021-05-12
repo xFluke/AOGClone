@@ -9,13 +9,19 @@ public class UnitMovement : MonoBehaviour
     Tile currentTargetTile;
     bool moving = false;
 
+    public List<Tile> copyOfPath;
+
     public void SetPath(List<Tile> path) {
         this.path = path;
         moving = true;
         currentTargetTile = path[0];
 
         GetComponent<Animator>().SetBool("Moving", true);
-        
+
+        copyOfPath.Clear();
+        foreach (var item in path) {
+            copyOfPath.Add(item);
+        }
     }
 
     private void Update() {

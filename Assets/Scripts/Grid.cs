@@ -20,7 +20,7 @@ public class Grid : MonoBehaviour
         grid = new Tile[xSize, ySize];
         highlightedTiles = new List<Tile>();
 
-        //GenerateGrid();
+        GenerateGrid();
     }
 
     private void GenerateGrid() {
@@ -92,5 +92,41 @@ public class Grid : MonoBehaviour
 
     public void SetTileAt(int x, int y, Tile tile) {
         grid[x, y] = tile;
+    }
+
+    public void FindAvailableTilesForUnit(Unit unit) {
+        Tile startingTile = GetTileAt(unit.X, unit.Y);
+
+        List<Tile> openSet = new List<Tile>();
+        HashSet<Tile> closedSet = new HashSet<Tile>();
+        openSet.Add(startingTile);
+
+        while (openSet.Count > 0) {
+            Tile currentTile = openSet[0];
+            openSet.Remove(currentTile);
+            closedSet.Add(currentTile);
+
+            foreach (Tile neighbour in GetNeighbourTiles(currentTile)) {
+                if (!neighbour)
+                    continue;
+
+                if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
+                    continue;
+                }
+
+                if (!openSet.Contains(neighbour)) {
+
+                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour);
+                    int costOfPath = FindObjectOfType<Pathfinding>().GetCostOfPath(pathToTile);
+
+                    if (costOfPath <= unit.MoveDistance) {
+                        openSet.Add(neighbour);
+
+                        neighbour.HighlightTile(true);
+                    }
+                }
+
+            }
+        }
     }
 }

@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
             currentlySelectedUnit = null;
         }
         else {
-            grid.HighlightUnitWalkableAreas(unit.X, unit.Y, unit.MoveDistance);
+            //grid.HighlightUnitWalkableAreas(unit.X, unit.Y, unit.MoveDistance);
+            grid.FindAvailableTilesForUnit(unit);
+
             currentlySelectedUnit = unit;
         }
     }
