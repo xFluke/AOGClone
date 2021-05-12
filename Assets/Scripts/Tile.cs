@@ -31,7 +31,7 @@ public class Tile : MonoBehaviour
     }
 
     private void Start() {
-        FindObjectOfType<Grid>().SetTileAt(x, y, this);
+        //FindObjectOfType<Grid>().SetTileAt(x, y, this);
 
         originalMaterial = GetComponent<MeshRenderer>().material;
     }

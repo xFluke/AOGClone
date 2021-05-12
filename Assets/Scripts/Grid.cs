@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Text.RegularExpressions;
 
 public class Grid : MonoBehaviour
 {
+    public Vector2 gridWorldSize;
+
+
     [SerializeField] GameObject grassTilePrefab;
+    [SerializeField] GameObject stoneTilePrefab;
 
     [SerializeField] int xSize;
     [SerializeField] int ySize;
@@ -17,10 +23,9 @@ public class Grid : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
-        grid = new Tile[xSize, ySize];
         highlightedTiles = new List<Tile>();
 
-        //GenerateGrid();
+        CreateGridFromMapFile("Assets/Resources/Map.txt");
     }
 
     private void GenerateGrid() {
@@ -33,6 +38,42 @@ public class Grid : MonoBehaviour
                 grid[x, y] = tile.GetComponent<Tile>();
             }
         }
+    }
+
+    private void CreateGridFromMapFile(string mapFilePath) {
+        StreamReader sr = new StreamReader(mapFilePath);
+        var mapFileContent = sr.ReadToEnd();
+        sr.Close();
+
+        var mapFileLines = Regex.Split(mapFileContent, "\r\n|\r|\n");
+        xSize = ySize = mapFileLines.Length;
+
+        grid = new Tile[xSize, ySize];
+
+        int x = 0;
+        int y = 0;
+
+        for (int i = ySize - 1; i >= 0; i--) {
+            string row = mapFileLines[i];
+
+            x = 0;
+            foreach (var tileChar in row) {
+                if (tileChar == '#') {
+                    GameObject tile = Instantiate(grassTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+                    tile.name = x + " " + y;
+                    tile.GetComponent<Tile>().SetCoordinate(x, y);
+                }
+                else if (tileChar == 'O') {
+                    GameObject tile = Instantiate(stoneTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+                    tile.name = x + " " + y;
+                    tile.GetComponent<Tile>().SetCoordinate(x, y);
+                }
+
+                x++;
+            }
+            y++;
+        }
+        
     }
 
     public void HighlightUnitWalkableAreas(int unitX, int unitY, int unitMoveDistance) {
