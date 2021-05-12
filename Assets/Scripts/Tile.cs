@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
     [SerializeField] int x;
     [SerializeField] int y;
 
-    bool highlighted = false;
+    [SerializeField] bool highlighted = false;
 
     Material originalMaterial;
 
@@ -64,6 +64,7 @@ public class Tile : MonoBehaviour
     private void OnMouseDown() {
         if (!highlighted) return;
 
+        Debug.Log("Help");
         onTileSelected.Invoke(this);
     }
 }

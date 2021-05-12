@@ -20,7 +20,7 @@ public class Grid : MonoBehaviour
         grid = new Tile[xSize, ySize];
         highlightedTiles = new List<Tile>();
 
-        GenerateGrid();
+        //GenerateGrid();
     }
 
     private void GenerateGrid() {
@@ -123,6 +123,7 @@ public class Grid : MonoBehaviour
                         openSet.Add(neighbour);
 
                         neighbour.HighlightTile(true);
+                        highlightedTiles.Add(neighbour);
                     }
                 }
 
