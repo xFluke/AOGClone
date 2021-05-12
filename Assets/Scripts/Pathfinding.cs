@@ -21,11 +21,11 @@ public class Pathfinding : MonoBehaviour
 
         while (openSet.Count > 0) {
             Tile currentTile = openSet[0];
-            //for (int i = 1; i < openSet.Count; i++) {
-            //    if (openSet[i].fCost < currentTile.fCost || openSet[i].fCost == currentTile.fCost && openSet[i].hCost < currentTile.hCost) {
-            //        currentTile = openSet[i];
-            //    }
-            //}
+            for (int i = 1; i < openSet.Count; i++) {
+                if (openSet[i].fCost < currentTile.fCost || openSet[i].fCost == currentTile.fCost && openSet[i].hCost < currentTile.hCost) {
+                    currentTile = openSet[i];
+                }
+            }
 
             openSet.Remove(currentTile);
             closedSet.Add(currentTile);

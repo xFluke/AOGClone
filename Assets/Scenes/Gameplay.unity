@@ -558,6 +558,8 @@ MonoBehaviour:
   gridWorldSize: {x: 0, y: 0}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   stoneTilePrefab: {fileID: 574095768331180527, guid: 63f12c7242f402242b3c2901b753dd4f, type: 3}
+  waterTilePrefab: {fileID: 5533899256396102110, guid: 9a57c041c3c0de446b5b666066d2a252, type: 3}
+  waterWithBridgeTilePrefab: {fileID: 527905944252723383, guid: 921fabcf0c54f244cbce20652ad27b0e, type: 3}
   xSize: 10
   ySize: 10
 --- !u!4 &364074244
@@ -724,7 +726,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
       propertyPath: m_LocalPosition.x
@@ -867,8 +869,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1513450597}
   - {fileID: 468796942}
+  - {fileID: 1513450597}
   - {fileID: 617656479}
   - {fileID: 346817275}
   - {fileID: 2099701839}
@@ -908,6 +910,8 @@ MonoBehaviour:
   gridWorldSize: {x: 1, y: 1}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   stoneTilePrefab: {fileID: 0}
+  waterTilePrefab: {fileID: 0}
+  waterWithBridgeTilePrefab: {fileID: 0}
   xSize: 10
   ySize: 10
 --- !u!114 &699089815
@@ -1227,6 +1231,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1299,6 +1304,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458832ddb43e6f443929234fc5d530a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 0.05
+  panSpeedJoystick: 0.05
+  panBorderThickness: 20
+  maxUpDistance: 10
+  maxDownDistance: 10
+  maxLeftDistance: 10
+  maxRightDistance: 10
+  maxZoom: 0
 --- !u!1001 &997182662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1725,7 +1750,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
       propertyPath: m_LocalPosition.x
