@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SelectPortal() {
+    public void SelectPortal(Portal portal) {
         Debug.Log("Clicked on Portal");
     }
 }

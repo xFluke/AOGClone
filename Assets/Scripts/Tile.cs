@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         get { return gCost + hCost + costModifier; }
     }
     [SerializeField] bool walkable = true;
-    public bool Walkable { get { return walkable; } }
+    public bool Walkable { get { return walkable; } set { walkable = value; } }
 
     private void Awake() {
         onTileSelected.AddListener(FindObjectOfType<GameManager>().SelectTile);

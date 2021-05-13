@@ -557,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSize: {x: 0, y: 0}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
+  grassWithPortalTilePrefab: {fileID: 5529198166750664246, guid: 1308e061c8b1a89499f43d342ec5e11d, type: 3}
   stoneTilePrefab: {fileID: 574095768331180527, guid: 63f12c7242f402242b3c2901b753dd4f, type: 3}
   waterTilePrefab: {fileID: 5533899256396102110, guid: 9a57c041c3c0de446b5b666066d2a252, type: 3}
   waterWithBridgeTilePrefab: {fileID: 527905944252723383, guid: 921fabcf0c54f244cbce20652ad27b0e, type: 3}
@@ -909,6 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSize: {x: 1, y: 1}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
+  grassWithPortalTilePrefab: {fileID: 0}
   stoneTilePrefab: {fileID: 0}
   waterTilePrefab: {fileID: 0}
   waterWithBridgeTilePrefab: {fileID: 0}
@@ -1317,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458832ddb43e6f443929234fc5d530a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 0.05
+  panSpeed: 0.01
   panSpeedJoystick: 0.05
   panBorderThickness: 20
   maxUpDistance: 10
@@ -2187,7 +2189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3472835526898384059, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.82
       objectReference: {fileID: 0}
     - target: {fileID: 3472835526898384059, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2229,13 +2231,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barbarian
       objectReference: {fileID: 0}
-    - target: {fileID: 7611456176382843167, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
-      propertyPath: moveDistance
-      value: 3
+    - target: {fileID: 3472835526898649373, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7611456176382843167, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
-      propertyPath: onUnitSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 300639274}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}

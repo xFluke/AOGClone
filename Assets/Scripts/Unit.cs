@@ -20,7 +20,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     public UnityEvent<Unit> onUnitSelected;
 
     private void Start() {
-        // Temporary just to move the unit to the correct spots
+        onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
+
         transform.position = new Vector3(2 * x, 1, 2 * y);
     }
 

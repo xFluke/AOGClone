@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
 
 
     [SerializeField] GameObject grassTilePrefab;
+    [SerializeField] GameObject grassWithPortalTilePrefab;
     [SerializeField] GameObject stoneTilePrefab;
     [SerializeField] GameObject waterTilePrefab;
     [SerializeField] GameObject waterWithBridgeTilePrefab;
@@ -72,6 +73,11 @@ public class Grid : MonoBehaviour
                 }
                 else if (tileChar == 'B') {
                     GameObject tile = Instantiate(waterWithBridgeTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+                    tile.name = x + " " + y;
+                    tile.GetComponent<Tile>().SetCoordinate(x, y);
+                }
+                else if (tileChar == 'P') {
+                    GameObject tile = Instantiate(grassWithPortalTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
                     tile.name = x + " " + y;
                     tile.GetComponent<Tile>().SetCoordinate(x, y);
                 }

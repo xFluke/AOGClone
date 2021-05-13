@@ -5,6 +5,7 @@ using UnityEngine.Animations;
 
 public class UnitMovement : MonoBehaviour
 {
+    Unit unit;
     public List<Tile> path;
     Tile currentTargetTile;
     bool moving = false;
@@ -12,6 +13,8 @@ public class UnitMovement : MonoBehaviour
     public List<Tile> copyOfPath;
 
     public void SetPath(List<Tile> path) {
+        FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).Walkable = true;
+
         this.path = path;
         moving = true;
         currentTargetTile = path[0];
@@ -22,6 +25,10 @@ public class UnitMovement : MonoBehaviour
         foreach (var item in path) {
             copyOfPath.Add(item);
         }
+    }
+
+    private void Start() {
+        unit = GetComponent<Unit>();   
     }
 
     private void Update() {
@@ -42,6 +49,8 @@ public class UnitMovement : MonoBehaviour
 
                     transform.position = new Vector3(Mathf.Round(transform.position.x), 1, Mathf.Round(transform.position.z));
                     GetComponent<Unit>().SetCoordinate((int)transform.position.x / 2, (int)transform.position.z / 2);
+
+                    FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).Walkable = false;
 
                     GetComponent<Animator>().SetBool("Moving", false);
                 }
