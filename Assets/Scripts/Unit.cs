@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] int x;
     [SerializeField] int y;
@@ -28,7 +29,7 @@ public class Unit : MonoBehaviour
         y = _y;
     }
 
-    private void OnMouseDown() {
+    public void OnPointerClick(PointerEventData eventData) {
         onUnitSelected.Invoke(this);
     }
 }

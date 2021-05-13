@@ -41,4 +41,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void SelectPortal() {
+        Debug.Log("Clicked on Portal");
+    }
 }

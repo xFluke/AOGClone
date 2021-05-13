@@ -103,7 +103,7 @@ MonoBehaviour:
       m_Calls: []
   gCost: 0
   hCost: 0
-  costModifier: 0
+  costModifier: 1
   parent: {fileID: 0}
   walkable: 1
 --- !u!1 &5447624124294063069

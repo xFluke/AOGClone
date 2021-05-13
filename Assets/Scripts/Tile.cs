@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] int x;
     [SerializeField] int y;
@@ -61,7 +62,7 @@ public class Tile : MonoBehaviour
         highlighted = false;
     }
 
-    private void OnMouseDown() {
+    public void OnPointerClick(PointerEventData eventData) {
         if (!highlighted) return;
 
         Debug.Log("Help");

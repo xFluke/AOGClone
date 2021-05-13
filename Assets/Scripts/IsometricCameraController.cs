@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class IsometricCameraController : MonoBehaviour
 {
 
@@ -31,7 +31,7 @@ public class IsometricCameraController : MonoBehaviour
 
         
             // Mouse hovering at the top
-            if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+            if (Pointer.current.position.y.ReadValue() >= Screen.height - panBorderThickness)
             {
                 if (!((newPosition + transform.up * panSpeed - startingPosition).magnitude > maxUpDistance))
                 {
@@ -39,7 +39,7 @@ public class IsometricCameraController : MonoBehaviour
                 }
             }
             // Mouse hovering at the bottom
-            else if (Input.mousePosition.y <= panBorderThickness)
+            else if (Pointer.current.position.y.ReadValue() <= panBorderThickness)
             {
                 if (!((newPosition - transform.up * panSpeed - startingPosition).magnitude > maxDownDistance))
                 {
@@ -48,7 +48,7 @@ public class IsometricCameraController : MonoBehaviour
             }
 
             // Mouse hovering on the right
-            if (Input.mousePosition.x >= Screen.width - panBorderThickness)
+            if (Pointer.current.position.x.ReadValue() >= Screen.width - panBorderThickness)
             {
                 if (!((newPosition + transform.right * panSpeed - startingPosition).magnitude > maxRightDistance))
                 {
@@ -56,7 +56,7 @@ public class IsometricCameraController : MonoBehaviour
                 }
             }
             // Mouse hovering on the left
-            else if (Input.mousePosition.x <= panBorderThickness)
+            else if (Pointer.current.position.x.ReadValue() <= panBorderThickness)
             {
                 if (!((newPosition - transform.right * panSpeed - startingPosition).magnitude > maxLeftDistance))
                 {
@@ -64,34 +64,30 @@ public class IsometricCameraController : MonoBehaviour
                 }
             }
 
-            if (Input.mouseScrollDelta.y > 0)
-            {
-                if (Camera.main.orthographicSize > maxZoom)
-                {
-                    Camera.main.orthographicSize--;
-                    //maxDownDistance += 0.5f;
-                    //maxLeftDistance += 0.5f;
-                    //maxRightDistance += 0.5f;
-                    //maxUpDistance += 0.5f;
-                }
-            }
+            //if (Input.mouseScrollDelta.y > 0)
+            //{
+            //    if (Camera.main.orthographicSize > maxZoom)
+            //    {
+            //        Camera.main.orthographicSize--;
+            //        //maxDownDistance += 0.5f;
+            //        //maxLeftDistance += 0.5f;
+            //        //maxRightDistance += 0.5f;
+            //        //maxUpDistance += 0.5f;
+            //    }
+            //}
 
-            if (Input.mouseScrollDelta.y < 0)
-            {
-                if (Camera.main.orthographicSize < 10)
-                {
-                    Camera.main.orthographicSize++;
-                    //maxDownDistance -= 0.5f;
-                    //maxLeftDistance -= 0.5f;
-                    //maxRightDistance -= 0.5f;
-                    //maxUpDistance -= 0.5f;
-                }
-            }
+            //if (Input.mouseScrollDelta.y < 0)
+            //{
+            //    if (Camera.main.orthographicSize < 10)
+            //    {
+            //        Camera.main.orthographicSize++;
+            //        //maxDownDistance -= 0.5f;
+            //        //maxLeftDistance -= 0.5f;
+            //        //maxRightDistance -= 0.5f;
+            //        //maxUpDistance -= 0.5f;
+            //    }
+            //}
         
-
-
-
-        //transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
         transform.position = newPosition;
 
 
