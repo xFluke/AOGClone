@@ -30,5 +30,4 @@ public class Portal : MonoBehaviour, IPointerClickHandler
     public void HideCanvas() {
         unitsCanvas.SetActive(false);
     }
-
 }
