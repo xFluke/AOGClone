@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
 
             onManaChanged.Invoke(mana);
         }
+        else {
+            FindObjectOfType<UIManager>().ShowInsufficientMana();
+        }
 
     }
 }
