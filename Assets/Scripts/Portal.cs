@@ -19,6 +19,9 @@ public class Portal : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData) {
+        // Prevent player from clicking on portal if there is already a unit standing on the same tile
+        if (!myTile.Walkable) return;
+
         onPortalSelected.Invoke(this);
 
         unitsCanvas.SetActive(!unitsCanvas.activeSelf);

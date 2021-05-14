@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         }
         else {
             //grid.HighlightUnitWalkableAreas(unit.X, unit.Y, unit.MoveDistance);
+            grid.UnhighlightTiles();
             grid.FindAvailableTilesForUnit(unit);
 
             currentlySelectedUnit = unit;

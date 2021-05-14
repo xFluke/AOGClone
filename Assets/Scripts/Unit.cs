@@ -23,6 +23,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler
         onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
 
         transform.position = new Vector3(2 * x, 1, 2 * y);
+
+        FindObjectOfType<Grid>().GetTileAt(x, y).Walkable = false;
     }
 
     public void SetCoordinate(int _x, int _y) {
