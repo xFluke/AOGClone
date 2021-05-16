@@ -11,6 +11,7 @@ public class Grid : MonoBehaviour
 
     [SerializeField] GameObject grassTilePrefab;
     [SerializeField] GameObject grassWithPortalTilePrefab;
+    [SerializeField] GameObject grassWithTowerTilePrefab;
     [SerializeField] GameObject stoneTilePrefab;
     [SerializeField] GameObject waterTilePrefab;
     [SerializeField] GameObject waterWithBridgeTilePrefab;
@@ -81,6 +82,11 @@ public class Grid : MonoBehaviour
                     tile.name = x + " " + y;
                     tile.GetComponent<Tile>().SetCoordinate(x, y);
                 }
+                else if (tileChar == 'T') {
+                    GameObject tile = Instantiate(grassWithTowerTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+                    tile.name = x + " " + y;
+                    tile.GetComponent<Tile>().SetCoordinate(x, y);
+                }
 
                 x++;
             }
@@ -89,28 +95,28 @@ public class Grid : MonoBehaviour
         
     }
 
-    public void HighlightUnitWalkableAreas(int unitX, int unitY, int unitMoveDistance) {
+    //public void HighlightUnitWalkableAreas(int unitX, int unitY, int unitMoveDistance) {
 
-        for (int tileX = unitX - unitMoveDistance; tileX <= unitX + unitMoveDistance; tileX++) {
+    //    for (int tileX = unitX - unitMoveDistance; tileX <= unitX + unitMoveDistance; tileX++) {
 
-            if (tileX < 0 || tileX >= xSize)
-                continue;
+    //        if (tileX < 0 || tileX >= xSize)
+    //            continue;
 
-            for (int tileY = unitY - unitMoveDistance; tileY <= unitY + unitMoveDistance; tileY++) {
+    //        for (int tileY = unitY - unitMoveDistance; tileY <= unitY + unitMoveDistance; tileY++) {
 
-                if (tileY < 0 || tileY >= ySize)
-                    continue;
+    //            if (tileY < 0 || tileY >= ySize)
+    //                continue;
 
-                if ((Mathf.Abs(tileX - unitX) + Mathf.Abs(tileY - unitY)) <= unitMoveDistance) {
-                    if (!grid[tileX, tileY])
-                        continue;
-                    grid[tileX, tileY].HighlightTile(true);
-                    highlightedTiles.Add(grid[tileX, tileY]);
-                }
+    //            if ((Mathf.Abs(tileX - unitX) + Mathf.Abs(tileY - unitY)) <= unitMoveDistance) {
+    //                if (!grid[tileX, tileY])
+    //                    continue;
+    //                grid[tileX, tileY].HighlightTile(true);
+    //                highlightedTiles.Add(grid[tileX, tileY]);
+    //            }
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
     public void UnhighlightTiles() {
         foreach (var tile in highlightedTiles) {
@@ -155,6 +161,8 @@ public class Grid : MonoBehaviour
         HashSet<Tile> closedSet = new HashSet<Tile>();
         openSet.Add(startingTile);
 
+        bool unitCanMove = !unit.GetComponent<UnitMovement>().MovedThisTurn;
+
         while (openSet.Count > 0) {
             Tile currentTile = openSet[0];
             openSet.Remove(currentTile);
@@ -164,20 +172,33 @@ public class Grid : MonoBehaviour
                 if (!neighbour)
                     continue;
 
-                if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
+                //if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
+                //    continue;
+                //}
+
+                if (closedSet.Contains(neighbour)) {
                     continue;
                 }
 
                 if (!openSet.Contains(neighbour)) {
 
-                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour);
+                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour, true);
                     int costOfPath = FindObjectOfType<Pathfinding>().GetCostOfPath(pathToTile);
 
-                    if (costOfPath <= unit.MoveDistance) {
+                    if (costOfPath <= unit.MoveDistance && costOfPath != -1) {
                         openSet.Add(neighbour);
 
-                        neighbour.HighlightTile(true);
+                        if (!neighbour.Walkable || neighbour.OccupiedByUnit) {
+                            neighbour.HighlightTile(false);
+                            highlightedTiles.Add(neighbour);
+                            continue;
+                        }
+
+                        neighbour.HighlightTile(unitCanMove); 
                         highlightedTiles.Add(neighbour);
+                    }
+                    else {
+                        
                     }
                 }
 

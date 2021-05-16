@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 517155132186832061}
   - component: {fileID: 505619651929330295}
   - component: {fileID: 281505866805082721}
+  - component: {fileID: 4684996717348287098}
   m_Layer: 0
   m_Name: Tile_WaterWithBridge
   m_TagString: Untagged
@@ -106,6 +107,19 @@ MonoBehaviour:
   costModifier: 1
   parent: {fileID: 0}
   walkable: 1
+--- !u!65 &4684996717348287098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527905944252723383}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.000815, y: 0.707217, z: 4.3500004}
+  m_Center: {x: 0.007428795, y: 0.63490885, z: 0}
 --- !u!1 &5447624124294063069
 GameObject:
   m_ObjectHideFlags: 0

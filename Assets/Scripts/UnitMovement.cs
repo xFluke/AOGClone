@@ -10,10 +10,13 @@ public class UnitMovement : MonoBehaviour
     Tile currentTargetTile;
     bool moving = false;
 
+    bool movedThisTurn = false;
+    public bool MovedThisTurn { get { return movedThisTurn; } }
+
     public List<Tile> copyOfPath;
 
     public void SetPath(List<Tile> path) {
-        FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).Walkable = true;
+        FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = false;
 
         this.path = path;
         moving = true;
@@ -25,6 +28,8 @@ public class UnitMovement : MonoBehaviour
         foreach (var item in path) {
             copyOfPath.Add(item);
         }
+
+        movedThisTurn = true;
     }
 
     private void Start() {
@@ -50,7 +55,7 @@ public class UnitMovement : MonoBehaviour
                     transform.position = new Vector3(Mathf.Round(transform.position.x), 1, Mathf.Round(transform.position.z));
                     GetComponent<Unit>().SetCoordinate((int)transform.position.x / 2, (int)transform.position.z / 2);
 
-                    FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).Walkable = false;
+                    FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = true;
 
                     GetComponent<Animator>().SetBool("Moving", false);
                 }

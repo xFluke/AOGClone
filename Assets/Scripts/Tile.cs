@@ -16,8 +16,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public UnityEvent<Tile> onTileSelected;
 
     // For Pathfinding
-     public int gCost;
-    public int hCost;
+    [HideInInspector] public int gCost;
+    [HideInInspector] public int hCost;
     public int costModifier;
     [HideInInspector] public Tile parent;
 
@@ -26,6 +26,15 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     }
     [SerializeField] bool walkable = true;
     public bool Walkable { get { return walkable; } set { walkable = value; } }
+
+    [SerializeField] bool occupiedByUnit = false;
+    public bool OccupiedByUnit {  
+        get { return occupiedByUnit; } 
+        set { 
+            occupiedByUnit = value;
+            walkable = !value;
+        } 
+    }
 
     private void Awake() {
         onTileSelected.AddListener(FindObjectOfType<GameManager>().SelectTile);
@@ -53,6 +62,11 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         // Gives the tile a green glow
         if (walkable) {
             GetComponent<MeshRenderer>().material = Resources.Load<Material>("Material_TileValidHighlight");
+            highlighted = true;
+        }
+        // Give tile red glow
+        else {
+            GetComponent<MeshRenderer>().material = Resources.Load<Material>("Material_TileInvalidHighlight");
             highlighted = true;
         }
     }

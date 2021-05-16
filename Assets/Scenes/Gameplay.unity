@@ -596,6 +596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0220b0e2dc55f9e46b1b1845e2e6d3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile1: {x: 1, y: 2}
+  tile2: {x: 5, y: 5}
 --- !u!114 &364074243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +613,7 @@ MonoBehaviour:
   gridWorldSize: {x: 0, y: 0}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   grassWithPortalTilePrefab: {fileID: 5529198166750664246, guid: 1308e061c8b1a89499f43d342ec5e11d, type: 3}
+  grassWithTowerTilePrefab: {fileID: 7401616511512671104, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
   stoneTilePrefab: {fileID: 574095768331180527, guid: 63f12c7242f402242b3c2901b753dd4f, type: 3}
   waterTilePrefab: {fileID: 5533899256396102110, guid: 9a57c041c3c0de446b5b666066d2a252, type: 3}
   waterWithBridgeTilePrefab: {fileID: 527905944252723383, guid: 921fabcf0c54f244cbce20652ad27b0e, type: 3}
@@ -771,63 +774,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   m_PrefabInstance: {fileID: 1804436677}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &586495222
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 699089813}
-    m_Modifications:
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-      propertyPath: m_Name
-      value: Tile_Grass
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
 --- !u!4 &617656479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
@@ -1005,7 +951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 468796942}
-  - {fileID: 1513450597}
+  - {fileID: 1316921214589769764}
   - {fileID: 617656479}
   - {fileID: 346817275}
   - {fileID: 2099701839}
@@ -1045,6 +991,7 @@ MonoBehaviour:
   gridWorldSize: {x: 1, y: 1}
   grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   grassWithPortalTilePrefab: {fileID: 0}
+  grassWithTowerTilePrefab: {fileID: 0}
   stoneTilePrefab: {fileID: 0}
   waterTilePrefab: {fileID: 0}
   waterWithBridgeTilePrefab: {fileID: 0}
@@ -1062,6 +1009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0220b0e2dc55f9e46b1b1845e2e6d3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile1: {x: 0, y: 0}
+  tile2: {x: 0, y: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,11 +1747,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   m_PrefabInstance: {fileID: 1392171689}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1513450597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-  m_PrefabInstance: {fileID: 586495222}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1564715869
 PrefabInstance:
@@ -2581,6 +2525,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1316921215150566610, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
   m_PrefabInstance: {fileID: 2129250367}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1316921214589769764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+  m_PrefabInstance: {fileID: 8423170435168056034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6453850215507431427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2642,3 +2591,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
+--- !u!1001 &8423170435168056034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 699089813}
+    m_Modifications:
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401616511512671104, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_Name
+      value: Tile_Grass
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}

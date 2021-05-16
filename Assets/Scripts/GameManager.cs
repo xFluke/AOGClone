@@ -40,6 +40,12 @@ public class GameManager : MonoBehaviour
 
         // Move selected unit to target tile
         if (currentlySelectedUnit != null) {
+            if (currentlySelectedUnit.GetComponent<UnitMovement>().MovedThisTurn) {
+                Debug.Log("Already moved");
+                return;
+            }
+
+
             Tile tileUnitIsOn = FindObjectOfType<Grid>().GetTileAt(currentlySelectedUnit.X, currentlySelectedUnit.Y);
 
             if (tileUnitIsOn != tileSelected) {

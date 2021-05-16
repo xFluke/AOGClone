@@ -6,14 +6,32 @@ public class Pathfinding : MonoBehaviour
 {
     Grid grid;
 
+    [SerializeField] Vector2Int tile1;
+    [SerializeField] Vector2Int tile2;
+
     private void Awake() {
         grid = GetComponent<Grid>();
     }
 
+    private void Start() {
+        //Tile tilea = FindObjectOfType<Grid>().GetTileAt(tile1.x, tile1.y);
+        //Tile tileb = FindObjectOfType<Grid>().GetTileAt(tile2.x, tile2.y);
+
+        //Debug.Log(tilea.GetCoordinates());
+        //Debug.Log(tileb.gameObject.name);
+
+        //List<Tile> tempPath = FindPath(tilea, tileb, false);
+
+        //foreach (var item in tempPath) {
+        //    Debug.Log(item);
+        //}
+        //Debug.Log(GetCostOfPath(tempPath));
+    }
+
     // A* pathfinding 
-    public List<Tile> FindPath(Tile startingTile, Tile targetTile) {
-        Debug.Log("Starting Tile: " + startingTile.name);
-        Debug.Log("Target Tile: " + targetTile.name);
+    public List<Tile> FindPath(Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = true) {
+        //Debug.Log("Starting Tile: " + startingTile.name);
+        //Debug.Log("Target Tile: " + targetTile.name);
 
         List<Tile> openSet = new List<Tile>();
         HashSet<Tile> closedSet = new HashSet<Tile>();
@@ -39,8 +57,14 @@ public class Pathfinding : MonoBehaviour
                 if (!neighbour)
                     continue;
 
-                if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
+                if (closedSet.Contains(neighbour)) {
                     continue;
+                }
+
+                if (!ignoreUnwalkableTiles) {
+                    if (!neighbour.Walkable || neighbour.OccupiedByUnit) {
+                        continue;
+                    }
                 }
 
                 int newMovementCostToNeighbour = currentTile.gCost + GetDistance(currentTile, neighbour) + neighbour.costModifier;
@@ -53,14 +77,13 @@ public class Pathfinding : MonoBehaviour
                     if (!openSet.Contains(neighbour)) {
                         openSet.Add(neighbour);
                     }
-
                     
                 }
             }
         }
 
-        Debug.Log("Could not find a path");
-        return new List<Tile>();
+        Debug.Log("Could not find a path from " + startingTile.name + " to " + targetTile.name);
+        return null;
     }
 
     
@@ -92,12 +115,15 @@ public class Pathfinding : MonoBehaviour
     }
 
     public int GetCostOfPath(List<Tile> path) {
+        if (path == null) {
+            return -1;
+        }
+
         int cost = 0;
 
         foreach (Tile tile in path) {
             cost += 1 + tile.costModifier;
         }
-
         return cost;
     }
 }

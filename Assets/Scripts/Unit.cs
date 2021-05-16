@@ -14,8 +14,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     public int Y { get { return y; } }
     public int MoveDistance { get { return moveDistance; } }
 
-    bool moving = false;
-    Vector2 moveDestination;
+
 
     public UnityEvent<Unit> onUnitSelected;
 
@@ -26,7 +25,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler
         x = (int)transform.position.x / 2;
         y = (int)transform.position.z / 2;
 
-        FindObjectOfType<Grid>().GetTileAt(x, y).Walkable = false;
+        FindObjectOfType<Grid>().GetTileAt(x, y).OccupiedByUnit = true;
     }
 
     public void SetCoordinate(int _x, int _y) {
