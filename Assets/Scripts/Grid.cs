@@ -131,7 +131,11 @@ public class Grid : MonoBehaviour
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                if (x == 0 && y == 0)
+                // support diagonal movement
+                //if (x == 0 && y == 0)
+                //    continue;
+
+                if (Mathf.Abs(x) == Mathf.Abs(y))
                     continue;
 
                 int checkX = tile.X + x;
@@ -172,9 +176,6 @@ public class Grid : MonoBehaviour
                 if (!neighbour)
                     continue;
 
-                //if (!neighbour.Walkable || closedSet.Contains(neighbour)) {
-                //    continue;
-                //}
 
                 if (closedSet.Contains(neighbour)) {
                     continue;
@@ -182,25 +183,30 @@ public class Grid : MonoBehaviour
 
                 if (!openSet.Contains(neighbour)) {
 
-                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour, true);
+                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour);
                     int costOfPath = FindObjectOfType<Pathfinding>().GetCostOfPath(pathToTile);
 
                     if (costOfPath <= unit.MoveDistance && costOfPath != -1) {
                         openSet.Add(neighbour);
 
-                        if (!neighbour.Walkable || neighbour.OccupiedByUnit) {
-                            neighbour.HighlightTile(false);
-                            highlightedTiles.Add(neighbour);
-                            continue;
-                        }
+                        //// If tile is within unit's move distance but is not a valid tile
+                        //if (!neighbour.Walkable || neighbour.OccupiedByUnit) {
+                        //    neighbour.HighlightTile(false);
+                        //    highlightedTiles.Add(neighbour);
+                        //    continue;
+                        //}
 
-                        neighbour.HighlightTile(unitCanMove); 
+                        // If tile is within unit's move distance and is also valid
+                        neighbour.HighlightTile(unitCanMove);
                         highlightedTiles.Add(neighbour);
                     }
                     else {
-                        
+                        closedSet.Add(neighbour);
+                        neighbour.HighlightTile(false);
+                        highlightedTiles.Add(neighbour);
                     }
                 }
+
 
             }
         }

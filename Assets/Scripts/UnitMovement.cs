@@ -10,8 +10,8 @@ public class UnitMovement : MonoBehaviour
     Tile currentTargetTile;
     bool moving = false;
 
-    bool movedThisTurn = false;
-    public bool MovedThisTurn { get { return movedThisTurn; } }
+    [SerializeField] bool movedThisTurn = false;
+    public bool MovedThisTurn { get { return movedThisTurn; } set { movedThisTurn = value; } }
 
     public List<Tile> copyOfPath;
 
@@ -19,6 +19,9 @@ public class UnitMovement : MonoBehaviour
         FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = false;
 
         this.path = path;
+
+        Debug.Log("Cost of path I'm moving on : " + FindObjectOfType<Pathfinding>().GetCostOfPath(path));
+
         moving = true;
         currentTargetTile = path[0];
 

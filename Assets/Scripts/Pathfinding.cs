@@ -29,7 +29,7 @@ public class Pathfinding : MonoBehaviour
     }
 
     // A* pathfinding 
-    public List<Tile> FindPath(Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = true) {
+    public List<Tile> FindPath(Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = false) {
         //Debug.Log("Starting Tile: " + startingTile.name);
         //Debug.Log("Target Tile: " + targetTile.name);
 

@@ -75,4 +75,17 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    public void EndTurn() {
+        Unit[] allUnits = FindObjectsOfType<Unit>();
+
+        foreach (var unit in allUnits) {
+            unit.ResetforNewTurn();
+        }
+    }
+
+    public int GetCurrentMana() {
+        Debug.Log(mana);
+        return mana;
+    }
 }

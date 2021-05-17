@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text manaDisplayText;
     [SerializeField] GameObject insufficientManaText;
 
+    private void Start() {
+        manaDisplayText.text = "Mana: " + FindObjectOfType<GameManager>().GetCurrentMana().ToString();
+    }
+
     public void UpdateManaDisplayText(int score) {
         manaDisplayText.text = "Mana: " + score;
     }

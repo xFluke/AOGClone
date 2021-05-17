@@ -36,4 +36,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData) {
         onUnitSelected.Invoke(this);
     }
+
+    public void ResetforNewTurn() {
+        GetComponent<UnitMovement>().MovedThisTurn = false;
+    } 
 }
