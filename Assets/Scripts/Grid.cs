@@ -189,13 +189,6 @@ public class Grid : MonoBehaviour
                     if (costOfPath <= unit.MoveDistance && costOfPath != -1) {
                         openSet.Add(neighbour);
 
-                        //// If tile is within unit's move distance but is not a valid tile
-                        //if (!neighbour.Walkable || neighbour.OccupiedByUnit) {
-                        //    neighbour.HighlightTile(false);
-                        //    highlightedTiles.Add(neighbour);
-                        //    continue;
-                        //}
-
                         // If tile is within unit's move distance and is also valid
                         neighbour.HighlightTile(unitCanMove);
                         highlightedTiles.Add(neighbour);

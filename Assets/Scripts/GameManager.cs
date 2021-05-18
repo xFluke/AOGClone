@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Unit currentlySelectedUnit;
     [SerializeField] int mana;
+    [SerializeField] int manaPerTurn;
 
     Grid grid;
 
     public UnityEvent<int> onManaChanged;
+    public UnityEvent onEndTurn;
 
     private void Start() {
         grid = FindObjectOfType<Grid>();
@@ -77,15 +79,21 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndTurn() {
-        Unit[] allUnits = FindObjectsOfType<Unit>();
+        onEndTurn.Invoke();
 
-        foreach (var unit in allUnits) {
-            unit.ResetforNewTurn();
-        }
+        mana += manaPerTurn;
+        onManaChanged.Invoke(mana);
     }
 
     public int GetCurrentMana() {
         Debug.Log(mana);
         return mana;
     }
+
+    public void IncreaseManaPerTurn(int amt) {
+        manaPerTurn += amt;
+    }
+
+
+  
 }

@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler
 
     private void Start() {
         onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
+        FindObjectOfType<GameManager>().onEndTurn.AddListener(ResetforNewTurn);
 
         transform.position = new Vector3(Mathf.Round(transform.position.x), 1, Mathf.Round(transform.position.z));
         x = (int)transform.position.x / 2;

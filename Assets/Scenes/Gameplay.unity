@@ -476,6 +476,7 @@ MonoBehaviour:
   unitCollection: {fileID: 11400000, guid: 6e0d47cc305980947834c9ed05a8b976, type: 2}
   currentlySelectedUnit: {fileID: 0}
   mana: 1000
+  manaPerTurn: 100
   onManaChanged:
     m_PersistentCalls:
       m_Calls:
@@ -491,6 +492,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onEndTurn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &329279067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2847,6 +2851,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 699089813}
     m_Modifications:
+    - target: {fileID: 6245574984563196383, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4b81ce4be924d046bd18c922a4e2470, type: 2}
     - target: {fileID: 7395957581145909958, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
       propertyPath: m_RootOrder
       value: 1
