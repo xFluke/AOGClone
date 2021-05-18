@@ -15,22 +15,22 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent<int> onManaChanged;
     public UnityEvent onEndTurn;
+    
+    private void Awake() {
+        unitCollection.Initialize();
+    }
 
     private void Start() {
         grid = FindObjectOfType<Grid>();
-
-        unitCollection.Initialize();
     }
 
     public void SelectUnit(Unit unit) {
         // If clicked on the same unit
         if (currentlySelectedUnit == unit) {
             grid.UnhighlightTiles();
-
             currentlySelectedUnit = null;
         }
         else {
-            //grid.HighlightUnitWalkableAreas(unit.X, unit.Y, unit.MoveDistance);
             grid.UnhighlightTiles();
             grid.FindAvailableTilesForUnit(unit);
 

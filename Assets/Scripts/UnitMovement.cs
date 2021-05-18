@@ -36,7 +36,9 @@ public class UnitMovement : MonoBehaviour
     }
 
     private void Start() {
-        unit = GetComponent<Unit>();   
+        unit = GetComponent<Unit>();
+
+        copyOfPath = new List<Tile>();
     }
 
     private void Update() {

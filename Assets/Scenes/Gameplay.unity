@@ -459,7 +459,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &300639274
 MonoBehaviour:
@@ -614,15 +614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aaa452406a5e34478b0dd0229cda66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWorldSize: {x: 0, y: 0}
-  grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-  grassWithPortalTilePrefab: {fileID: 5529198166750664246, guid: 1308e061c8b1a89499f43d342ec5e11d, type: 3}
-  grassWithTowerTilePrefab: {fileID: 7401616511512671104, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
-  stoneTilePrefab: {fileID: 574095768331180527, guid: 63f12c7242f402242b3c2901b753dd4f, type: 3}
-  waterTilePrefab: {fileID: 5533899256396102110, guid: 9a57c041c3c0de446b5b666066d2a252, type: 3}
-  waterWithBridgeTilePrefab: {fileID: 527905944252723383, guid: 921fabcf0c54f244cbce20652ad27b0e, type: 3}
   xSize: 10
   ySize: 10
+  tileCollection: {fileID: 11400000, guid: aed0ccf79acf94b4184154789738b967, type: 2}
 --- !u!4 &364074244
 Transform:
   m_ObjectHideFlags: 0
@@ -635,7 +629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &393810665
 GameObject:
@@ -1125,15 +1119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aaa452406a5e34478b0dd0229cda66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWorldSize: {x: 1, y: 1}
-  grassTilePrefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
-  grassWithPortalTilePrefab: {fileID: 0}
-  grassWithTowerTilePrefab: {fileID: 0}
-  stoneTilePrefab: {fileID: 0}
-  waterTilePrefab: {fileID: 0}
-  waterWithBridgeTilePrefab: {fileID: 0}
   xSize: 10
   ySize: 10
+  tileCollection: {fileID: 0}
 --- !u!114 &699089815
 MonoBehaviour:
   m_ObjectHideFlags: 0

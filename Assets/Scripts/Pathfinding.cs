@@ -6,44 +6,18 @@ public class Pathfinding : MonoBehaviour
 {
     Grid grid;
 
-    [SerializeField] Vector2Int tile1;
-    [SerializeField] Vector2Int tile2;
-
     private void Awake() {
         grid = GetComponent<Grid>();
     }
 
-    private void Start() {
-        //Tile tilea = FindObjectOfType<Grid>().GetTileAt(tile1.x, tile1.y);
-        //Tile tileb = FindObjectOfType<Grid>().GetTileAt(tile2.x, tile2.y);
-
-        //Debug.Log(tilea.GetCoordinates());
-        //Debug.Log(tileb.gameObject.name);
-
-        //List<Tile> tempPath = FindPath(tilea, tileb, false);
-
-        //foreach (var item in tempPath) {
-        //    Debug.Log(item);
-        //}
-        //Debug.Log(GetCostOfPath(tempPath));
-    }
-
     // A* pathfinding 
     public List<Tile> FindPath(Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = false) {
-        //Debug.Log("Starting Tile: " + startingTile.name);
-        //Debug.Log("Target Tile: " + targetTile.name);
-
         List<Tile> openSet = new List<Tile>();
         HashSet<Tile> closedSet = new HashSet<Tile>();
         openSet.Add(startingTile);
 
         while (openSet.Count > 0) {
             Tile currentTile = openSet[0];
-            //for (int i = 1; i < openSet.Count; i++) {
-            //    if (openSet[i].fCost < currentTile.fCost || openSet[i].fCost == currentTile.fCost && openSet[i].hCost < currentTile.hCost) {
-            //        currentTile = openSet[i];
-            //    }
-            //}
 
             openSet.Remove(currentTile);
             closedSet.Add(currentTile);
@@ -81,12 +55,8 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("Could not find a path from " + startingTile.name + " to " + targetTile.name);
         return null;
     }
-
-    
 
     List<Tile> RetracePath(Tile startTile, Tile endTile) {
         List<Tile> path = new List<Tile>();

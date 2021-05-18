@@ -3,25 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text.RegularExpressions;
+using System;
 
 public class Grid : MonoBehaviour
 {
-    public Vector2 gridWorldSize;
-
-
-    [SerializeField] GameObject grassTilePrefab;
-    [SerializeField] GameObject grassWithPortalTilePrefab;
-    [SerializeField] GameObject grassWithTowerTilePrefab;
-    [SerializeField] GameObject stoneTilePrefab;
-    [SerializeField] GameObject waterTilePrefab;
-    [SerializeField] GameObject waterWithBridgeTilePrefab;
-
     [SerializeField] int xSize;
     [SerializeField] int ySize;
 
     private float tileSize = 2.0f;
 
     Tile[,] grid;
+    [SerializeField] TileCollection tileCollection;
 
     List<Tile> highlightedTiles;
 
@@ -29,22 +21,31 @@ public class Grid : MonoBehaviour
     void Awake() {
         highlightedTiles = new List<Tile>();
 
-        CreateGridFromMapFile("Assets/Resources/Map.txt");
-    }
-
-    private void GenerateGrid() {
-        for (int x = 0; x < xSize; x++) {
-            for (int y = 0; y < ySize; y++) {
-                GameObject tile = Instantiate(grassTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                tile.name = x + " " + y;
-                tile.GetComponent<Tile>().SetCoordinate(x, y);
-                
-                grid[x, y] = tile.GetComponent<Tile>();
-            }
+        // Map already created
+        if (transform.childCount > 0) {
+            InitializeGrid();
+        }
+        else {
+            CreateGridFromMapFile("Assets/Resources/Map.txt");
         }
     }
 
-    private void CreateGridFromMapFile(string mapFilePath) {
+    private void InitializeGrid() {
+        grid = new Tile[xSize, ySize];
+
+        foreach (Transform child in transform) {
+            Tile tile = child.GetComponent<Tile>();
+
+            grid[tile.X, tile.Y] = tile;
+        }
+    }
+
+    public void CreateGridFromMapFile(string mapFilePath = "Assets/Resources/Map.txt") {
+        if (transform.childCount > 0)
+            return;
+
+        tileCollection.Initialize();
+
         StreamReader sr = new StreamReader(mapFilePath);
         var mapFileContent = sr.ReadToEnd();
         sr.Close();
@@ -62,61 +63,19 @@ public class Grid : MonoBehaviour
 
             x = 0;
             foreach (var tileChar in row) {
-                if (tileChar == '#') {
-                    GameObject tile = Instantiate(grassTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                    tile.name = x + " " + y;
-                    tile.GetComponent<Tile>().SetCoordinate(x, y);
-                }
-                else if (tileChar == 'O') {
-                    GameObject tile = Instantiate(waterTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                    tile.name = x + " " + y;
-                    tile.GetComponent<Tile>().SetCoordinate(x, y);
-                }
-                else if (tileChar == 'B') {
-                    GameObject tile = Instantiate(waterWithBridgeTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                    tile.name = x + " " + y;
-                    tile.GetComponent<Tile>().SetCoordinate(x, y);
-                }
-                else if (tileChar == 'P') {
-                    GameObject tile = Instantiate(grassWithPortalTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                    tile.name = x + " " + y;
-                    tile.GetComponent<Tile>().SetCoordinate(x, y);
-                }
-                else if (tileChar == 'T') {
-                    GameObject tile = Instantiate(grassWithTowerTilePrefab, new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
-                    tile.name = x + " " + y;
-                    tile.GetComponent<Tile>().SetCoordinate(x, y);
-                }
+                InstantiateTile(tileChar, x, y);
 
                 x++;
             }
             y++;
         }
-        
     }
 
-    //public void HighlightUnitWalkableAreas(int unitX, int unitY, int unitMoveDistance) {
-
-    //    for (int tileX = unitX - unitMoveDistance; tileX <= unitX + unitMoveDistance; tileX++) {
-
-    //        if (tileX < 0 || tileX >= xSize)
-    //            continue;
-
-    //        for (int tileY = unitY - unitMoveDistance; tileY <= unitY + unitMoveDistance; tileY++) {
-
-    //            if (tileY < 0 || tileY >= ySize)
-    //                continue;
-
-    //            if ((Mathf.Abs(tileX - unitX) + Mathf.Abs(tileY - unitY)) <= unitMoveDistance) {
-    //                if (!grid[tileX, tileY])
-    //                    continue;
-    //                grid[tileX, tileY].HighlightTile(true);
-    //                highlightedTiles.Add(grid[tileX, tileY]);
-    //            }
-
-    //        }
-    //    }
-    //}
+    private void InstantiateTile(char c, int x, int y) {
+        GameObject newTile = Instantiate(tileCollection[c].GetPrefab(), new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+        newTile.name = x + " " + y;
+        newTile.GetComponent<Tile>().SetCoordinate(x, y);
+    }
 
     public void UnhighlightTiles() {
         foreach (var tile in highlightedTiles) {
@@ -155,7 +114,8 @@ public class Grid : MonoBehaviour
     }
 
     public void SetTileAt(int x, int y, Tile tile) {
-        grid[x, y] = tile;
+        if (grid != null)
+            grid[x, y] = tile;
     }
 
     public void FindAvailableTilesForUnit(Unit unit) {
@@ -202,6 +162,16 @@ public class Grid : MonoBehaviour
 
 
             }
+        }
+    }
+
+    public void DeleteMap() {
+        if (Application.isPlaying) {
+            Array.Clear(grid, 0, grid.Length);
+        }
+
+        for (int i = transform.childCount - 1; i >= 0; i--) {
+            DestroyImmediate(transform.GetChild(i).gameObject);
         }
     }
 }

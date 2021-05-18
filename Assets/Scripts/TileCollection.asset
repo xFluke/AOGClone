@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c7469575c443647a6eaa5913c976c5, type: 3}
+  m_Name: TileCollection
+  m_EditorClassIdentifier: 
+  tileBlueprints:
+  - prefab: {fileID: 1320346211690378644, guid: 3ecdf26e31373e541bb13036363cf812, type: 3}
+    identifier: 35
+  - prefab: {fileID: 5529198166750664246, guid: 1308e061c8b1a89499f43d342ec5e11d, type: 3}
+    identifier: 80
+  - prefab: {fileID: 7401616511512671104, guid: 8fb36a5d45e815043a366652dd266dcb, type: 3}
+    identifier: 84
+  - prefab: {fileID: 5533899256396102110, guid: 9a57c041c3c0de446b5b666066d2a252, type: 3}
+    identifier: 79
+  - prefab: {fileID: 527905944252723383, guid: 921fabcf0c54f244cbce20652ad27b0e, type: 3}
+    identifier: 66

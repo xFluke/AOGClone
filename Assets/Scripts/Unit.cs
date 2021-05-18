@@ -14,11 +14,11 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     public int Y { get { return y; } }
     public int MoveDistance { get { return moveDistance; } }
 
-
-
     public UnityEvent<Unit> onUnitSelected;
 
     private void Start() {
+        gameObject.AddComponent<UnitMovement>();
+
         onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
         FindObjectOfType<GameManager>().onEndTurn.AddListener(ResetforNewTurn);
 

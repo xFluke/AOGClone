@@ -79,7 +79,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData) {
         if (!highlighted) return;
 
-        Debug.Log("Help");
         onTileSelected.Invoke(this);
     }
 }
