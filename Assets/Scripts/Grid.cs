@@ -10,7 +10,8 @@ public class Grid : MonoBehaviour
     [SerializeField] int xSize;
     [SerializeField] int ySize;
 
-    private float tileSize = 2.0f;
+    private const float tilePrefabSize = 2.0f;
+    float tileObjectSize;
 
     Tile[,] grid;
     [SerializeField] TileCollection tileCollection;
@@ -19,6 +20,7 @@ public class Grid : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
+
         highlightedTiles = new List<Tile>();
 
         // Map already created
@@ -31,6 +33,8 @@ public class Grid : MonoBehaviour
     }
 
     private void InitializeGrid() {
+        tileObjectSize = tilePrefabSize * transform.localScale.x;
+
         grid = new Tile[xSize, ySize];
 
         foreach (Transform child in transform) {
@@ -44,6 +48,7 @@ public class Grid : MonoBehaviour
         if (transform.childCount > 0)
             return;
 
+        tileObjectSize = tilePrefabSize * transform.localScale.x;
         tileCollection.Initialize();
 
         StreamReader sr = new StreamReader(mapFilePath);
@@ -72,7 +77,7 @@ public class Grid : MonoBehaviour
     }
 
     private void InstantiateTile(char c, int x, int y) {
-        GameObject newTile = Instantiate(tileCollection[c].GetPrefab(), new Vector3(x, 0, y) * tileSize, Quaternion.identity, transform);
+        GameObject newTile = Instantiate(tileCollection[c].GetPrefab(), new Vector3(x, 0, y) * tileObjectSize, Quaternion.identity, transform);
         newTile.name = x + " " + y;
         newTile.GetComponent<Tile>().SetCoordinate(x, y);
     }
@@ -173,5 +178,13 @@ public class Grid : MonoBehaviour
         for (int i = transform.childCount - 1; i >= 0; i--) {
             DestroyImmediate(transform.GetChild(i).gameObject);
         }
+    }
+
+    public float GetYSpawnPosition() {
+        return (float)tileObjectSize / 2;
+    }
+
+    public float GetTileObjectSize() {
+        return tileObjectSize;
     }
 }

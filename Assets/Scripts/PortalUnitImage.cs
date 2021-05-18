@@ -9,7 +9,7 @@ public class PortalUnitImage : MonoBehaviour, IPointerClickHandler
     [SerializeField] Portal portal;
     [SerializeField] UnitNames unitName;
 
-    public UnityEvent<UnitNames, Vector3> onPortalUnitImageClicked;
+    public UnityEvent<UnitNames, Vector2Int> onPortalUnitImageClicked;
 
     private void Start() {
         onPortalUnitImageClicked.AddListener(FindObjectOfType<GameManager>().SummonUnit);
@@ -20,6 +20,6 @@ public class PortalUnitImage : MonoBehaviour, IPointerClickHandler
         //newUnit.GetComponent<Unit>().SetCoordinate(portal.X, portal.Y);
         portal.HideCanvas();
 
-        onPortalUnitImageClicked.Invoke(unitName, GetComponentInParent<Transform>().position);
+        onPortalUnitImageClicked.Invoke(unitName, new Vector2Int(portal.X, portal.Y));
     }
 }

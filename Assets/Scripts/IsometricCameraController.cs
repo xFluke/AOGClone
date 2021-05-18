@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class IsometricCameraController : MonoBehaviour
 {
-
+    public float deltaX;
+    public float deltaY;
     [SerializeField] private float panSpeed = 1f;
-    [SerializeField] private float panSpeedJoystick = 0.05f;
     [SerializeField] private float panBorderThickness = 20f;
 
     private Vector3 newPosition;
-    private Vector3 startingPosition;
 
     [SerializeField] float maxUpDistance;
     [SerializeField] float maxDownDistance;
@@ -18,10 +17,11 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] float maxRightDistance;
     [SerializeField] float maxZoom;
 
+    float maxRightDistancePosition;
+
     void Awake()
     {
         newPosition = transform.position;
-        startingPosition = transform.position;
     }
 
     void Update()
@@ -30,26 +30,29 @@ public class IsometricCameraController : MonoBehaviour
 
         // Mouse hovering at the top
         if (Pointer.current.position.y.ReadValue() >= Screen.height - panBorderThickness) {
-            if (!((newPosition + transform.up * panSpeed - startingPosition).magnitude > maxUpDistance)) {
+            if (deltaY < maxUpDistance) {
+                deltaY += panSpeed;
                 newPosition += transform.up * panSpeed;
             }
         }
         // Mouse hovering at the bottom
         else if (Pointer.current.position.y.ReadValue() <= panBorderThickness) {
-            if (!((newPosition - transform.up * panSpeed - startingPosition).magnitude > maxDownDistance)) {
+            if (deltaY > -maxDownDistance) {
+                deltaY -= panSpeed;
                 newPosition -= transform.up * panSpeed;
             }
         }
-
         // Mouse hovering on the right
         if (Pointer.current.position.x.ReadValue() >= Screen.width - panBorderThickness) {
-            if (!((newPosition + transform.right * panSpeed - startingPosition).magnitude > maxRightDistance)) {
+            if (deltaX < maxRightDistance) {
+                deltaX += panSpeed;
                 newPosition += transform.right * panSpeed;
             }
         }
         // Mouse hovering on the left
         else if (Pointer.current.position.x.ReadValue() <= panBorderThickness) {
-            if (!((newPosition - transform.right * panSpeed - startingPosition).magnitude > maxLeftDistance)) {
+            if (deltaX > -maxLeftDistance) {
+                deltaX -= panSpeed;
                 newPosition -= transform.right * panSpeed;
             }
         }

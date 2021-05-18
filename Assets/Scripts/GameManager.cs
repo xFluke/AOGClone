@@ -63,12 +63,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Clicked on Portal");
     }
 
-    public void SummonUnit(UnitNames unitName, Vector3 position) {
+    public void SummonUnit(UnitNames unitName, Vector2Int coordinates) {
         int unitCost = unitCollection[UnitNames.BARBARIAN].cost;
         if (mana >= unitCost) {
             mana -= unitCost;
 
-            GameObject newUnit = Instantiate(unitCollection[UnitNames.BARBARIAN].prefab, position, Quaternion.identity);
+            GameObject newUnit = Instantiate(unitCollection[UnitNames.BARBARIAN].prefab);
+            newUnit.transform.localScale = grid.transform.localScale;
+            newUnit.GetComponent<Unit>().SetCoordinates(coordinates.x, coordinates.y);
 
             onManaChanged.Invoke(mana);
         }

@@ -15,6 +15,8 @@ public class UnitMovement : MonoBehaviour
 
     public List<Tile> copyOfPath;
 
+    float yOffset;
+
     public void SetPath(List<Tile> path) {
         FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = false;
 
@@ -39,14 +41,16 @@ public class UnitMovement : MonoBehaviour
         unit = GetComponent<Unit>();
 
         copyOfPath = new List<Tile>();
+
+        yOffset = FindObjectOfType<Grid>().GetYSpawnPosition();
     }
 
     private void Update() {
         if (moving) {
-            Vector3 targetTilePosition = currentTargetTile.transform.position + new Vector3(0, 1, 0);
+            Vector3 targetTilePosition = currentTargetTile.transform.position + new Vector3(0, yOffset, 0);
 
-            transform.position = Vector3.MoveTowards(transform.position, targetTilePosition, 0.01f);
-            transform.rotation = Quaternion.LookRotation(currentTargetTile.transform.position + new Vector3(0, 1, 0) - transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, targetTilePosition, 0.05f);
+            transform.rotation = Quaternion.LookRotation(currentTargetTile.transform.position + new Vector3(0, yOffset, 0) - transform.position);
 
             if (Vector3.Distance(transform.position, targetTilePosition) <= 0.01f) {
                 path.RemoveAt(0);
@@ -57,8 +61,8 @@ public class UnitMovement : MonoBehaviour
                 else {
                     moving = false;
 
-                    transform.position = new Vector3(Mathf.Round(transform.position.x), 1, Mathf.Round(transform.position.z));
-                    GetComponent<Unit>().SetCoordinate((int)transform.position.x / 2, (int)transform.position.z / 2);
+                    transform.position = new Vector3(Mathf.Round(transform.position.x), yOffset, Mathf.Round(transform.position.z));
+                    GetComponent<Unit>().SetCoordinates(currentTargetTile.X, currentTargetTile.Y);
 
                     FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = true;
 

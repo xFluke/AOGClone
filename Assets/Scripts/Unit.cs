@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     public int Y { get { return y; } }
     public int MoveDistance { get { return moveDistance; } }
 
+    [HideInInspector]
     public UnityEvent<Unit> onUnitSelected;
 
     private void Start() {
@@ -21,17 +22,21 @@ public class Unit : MonoBehaviour, IPointerClickHandler
 
         onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
         FindObjectOfType<GameManager>().onEndTurn.AddListener(ResetforNewTurn);
-
-        transform.position = new Vector3(Mathf.Round(transform.position.x), 1, Mathf.Round(transform.position.z));
-        x = (int)transform.position.x / 2;
-        y = (int)transform.position.z / 2;
-
-        FindObjectOfType<Grid>().GetTileAt(x, y).OccupiedByUnit = true;
     }
 
-    public void SetCoordinate(int _x, int _y) {
+    public void SetCoordinates(int _x, int _y) {
         x = _x;
         y = _y;
+
+        SetPosition();        
+    }
+
+    private void SetPosition() {
+        FindObjectOfType<Grid>().GetTileAt(x, y).OccupiedByUnit = true;
+
+        float tileSize = FindObjectOfType<Grid>().GetTileObjectSize();
+        float ySpawnPosition = FindObjectOfType<Grid>().GetYSpawnPosition();
+        transform.position = new Vector3(x * tileSize, ySpawnPosition, y * tileSize);
     }
 
     public void OnPointerClick(PointerEventData eventData) {
