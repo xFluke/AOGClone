@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Unit : MonoBehaviour, IPointerClickHandler
+public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] UnitNames unitName;
     [SerializeField] int x;
     [SerializeField] int y;
     [SerializeField] int moveDistance;
@@ -17,11 +18,17 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     [HideInInspector]
     public UnityEvent<Unit> onUnitSelected;
 
+    [SerializeField] UnitInformationUI unitInformationUI;
+
     private void Start() {
         gameObject.AddComponent<UnitMovement>();
 
+        unitInformationUI.Initialize(unitName);
+        
         onUnitSelected.AddListener(FindObjectOfType<GameManager>().SelectUnit);
         FindObjectOfType<GameManager>().onEndTurn.AddListener(ResetforNewTurn);
+
+        SetPosition();
     }
 
     public void SetCoordinates(int _x, int _y) {
@@ -45,5 +52,13 @@ public class Unit : MonoBehaviour, IPointerClickHandler
 
     public void ResetforNewTurn() {
         GetComponent<UnitMovement>().MovedThisTurn = false;
-    } 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        unitInformationUI.ShowUnitInformation();
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        unitInformationUI.HideUnitInformation();
+    }
 }

@@ -17,6 +17,8 @@ public class UnitMovement : MonoBehaviour
 
     float yOffset;
 
+    float moveSpeed;
+
     public void SetPath(List<Tile> path) {
         FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = false;
 
@@ -35,6 +37,8 @@ public class UnitMovement : MonoBehaviour
         }
 
         movedThisTurn = true;
+
+        UpdateRotation();
     }
 
     private void Start() {
@@ -43,20 +47,23 @@ public class UnitMovement : MonoBehaviour
         copyOfPath = new List<Tile>();
 
         yOffset = FindObjectOfType<Grid>().GetYSpawnPosition();
+
+        moveSpeed = transform.localScale.x / 100f;
     }
 
     private void Update() {
         if (moving) {
             Vector3 targetTilePosition = currentTargetTile.transform.position + new Vector3(0, yOffset, 0);
 
-            transform.position = Vector3.MoveTowards(transform.position, targetTilePosition, 0.05f);
-            transform.rotation = Quaternion.LookRotation(currentTargetTile.transform.position + new Vector3(0, yOffset, 0) - transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, targetTilePosition, moveSpeed);
 
             if (Vector3.Distance(transform.position, targetTilePosition) <= 0.01f) {
                 path.RemoveAt(0);
 
                 if (path.Count > 0) {
                     currentTargetTile = path[0];
+
+                    UpdateRotation();
                 }
                 else {
                     moving = false;
@@ -70,5 +77,10 @@ public class UnitMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateRotation() {
+        Vector3 resultantPosition = currentTargetTile.transform.position + new Vector3(0, yOffset, 0) - transform.position;
+        transform.rotation = Quaternion.LookRotation(resultantPosition);
     }
 }
