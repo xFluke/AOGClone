@@ -27,6 +27,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField] bool walkable = true;
     public bool Walkable { get { return walkable; } set { walkable = value; } }
 
+    bool clickable = false;
+
     [SerializeField] bool occupiedByUnit = false;
     public bool OccupiedByUnit {  
         get { return occupiedByUnit; } 
@@ -63,11 +65,13 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         if (walkable) {
             GetComponent<MeshRenderer>().material = Resources.Load<Material>("Material_TileValidHighlight");
             highlighted = true;
+            clickable = true;
         }
         // Give tile red glow
         else {
             GetComponent<MeshRenderer>().material = Resources.Load<Material>("Material_TileInvalidHighlight");
             highlighted = true;
+            clickable = false;
         }
     }
 
@@ -78,6 +82,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData) {
         if (!highlighted) return;
+        if (!clickable) return;
 
         onTileSelected.Invoke(this);
     }

@@ -155,13 +155,20 @@ public class Grid : MonoBehaviour
                         openSet.Add(neighbour);
 
                         // If tile is within unit's move distance and is also valid
-                        neighbour.HighlightTile(unitCanMove);
+                        if (unit.IsPlayerUnit)
+                            neighbour.HighlightTile(unitCanMove);
+                        else
+                            neighbour.HighlightTile(false);
+
                         highlightedTiles.Add(neighbour);
                     }
                     else {
                         closedSet.Add(neighbour);
-                        neighbour.HighlightTile(false);
-                        highlightedTiles.Add(neighbour);
+
+                        if (unit.IsPlayerUnit && unitCanMove) {
+                            neighbour.HighlightTile(false);
+                            highlightedTiles.Add(neighbour);
+                        }
                     }
                 }
 

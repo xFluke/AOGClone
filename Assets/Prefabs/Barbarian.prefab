@@ -3324,6 +3324,7 @@ MonoBehaviour:
   x: 2
   y: 2
   moveDistance: 3
+  maxHealth: 15
   onUnitSelected:
     m_PersistentCalls:
       m_Calls: []

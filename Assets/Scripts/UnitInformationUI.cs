@@ -15,8 +15,9 @@ public class UnitInformationUI : MonoBehaviour
         Debug.Log("Information Canvas: " + unitInformationCanvas.transform.rotation);  
     }
 
-    public void Initialize(UnitNames unitName) { 
+    public void Initialize(UnitNames unitName, int health) { 
         unitNameText.text = unitName.ToString();
+        hpText.text = health + "/" + health;
     }
 
     public void ShowUnitInformation() {

@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
         // Move selected unit to target tile
         if (currentlySelectedUnit != null) {
             if (currentlySelectedUnit.GetComponent<UnitMovement>().MovedThisTurn) {
-                Debug.Log("Already moved");
                 return;
             }
 
@@ -71,6 +70,7 @@ public class GameManager : MonoBehaviour
             GameObject newUnit = Instantiate(unitCollection[UnitNames.BARBARIAN].prefab);
             newUnit.transform.localScale = grid.transform.localScale;
             newUnit.GetComponent<Unit>().SetCoordinates(coordinates.x, coordinates.y);
+            newUnit.GetComponent<Unit>().IsPlayerUnit = true;
 
             onManaChanged.Invoke(mana);
         }

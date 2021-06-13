@@ -16,9 +16,12 @@ public class UnitCollection : ScriptableObject
     [Serializable]
     public class UnitBlueprint
     {
+        public UnitNames name;
         public GameObject prefab;
         public int cost;
-        public UnitNames name;
+        public int maxHealth;
+        public int moveDistance;
+        
 
         public GameObject GetPrefab() {
             return prefab;

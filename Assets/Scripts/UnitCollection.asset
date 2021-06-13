@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: UnitCollection
   m_EditorClassIdentifier: 
   unitBlueprints:
-  - prefab: {fileID: 3472835526898649373, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
+  - name: 0
+    prefab: {fileID: 3472835526898649373, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
     cost: 50
-    name: 0
+    maxHealth: 10
+    moveDistance: 3
