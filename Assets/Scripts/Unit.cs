@@ -13,10 +13,6 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] int maxHealth;
     int currentHealth;
 
-    [SerializeField] private bool isPlayerUnit;
-
-    public bool IsPlayerUnit { get { return isPlayerUnit; } set { isPlayerUnit = value; } }
-
     public int X { get { return x; } }
     public int Y { get { return y; } }
     public int MoveDistance { get { return moveDistance; } }

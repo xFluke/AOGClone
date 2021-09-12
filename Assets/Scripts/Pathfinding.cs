@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    Grid grid;
-
-    private void Awake() {
-        grid = GetComponent<Grid>();
-    }
-
     // A* pathfinding 
-    public List<Tile> FindPath(Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = false) {
+    public static List<Tile> FindPath(Grid grid, Tile startingTile, Tile targetTile, bool ignoreUnwalkableTiles = false) {
         List<Tile> openSet = new List<Tile>();
         HashSet<Tile> closedSet = new HashSet<Tile>();
         openSet.Add(startingTile);
@@ -58,7 +52,7 @@ public class Pathfinding : MonoBehaviour
         return null;
     }
 
-    List<Tile> RetracePath(Tile startTile, Tile endTile) {
+    static List<Tile> RetracePath(Tile startTile, Tile endTile) {
         List<Tile> path = new List<Tile>();
         Tile currentTile = endTile;
 
@@ -72,7 +66,7 @@ public class Pathfinding : MonoBehaviour
         return path;
     }
 
-    int GetDistance(Tile tileA, Tile tileB) {
+    static int GetDistance(Tile tileA, Tile tileB) {
         int distanceX = Mathf.Abs(tileA.X - tileB.X);
         int distanceY = Mathf.Abs(tileA.Y - tileB.Y);
 
@@ -84,7 +78,7 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
-    public int GetCostOfPath(List<Tile> path) {
+    public static int GetCostOfPath(List<Tile> path) {
         if (path == null) {
             return -1;
         }

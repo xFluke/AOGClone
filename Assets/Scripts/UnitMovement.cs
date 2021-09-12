@@ -23,8 +23,8 @@ public class UnitMovement : MonoBehaviour
         FindObjectOfType<Grid>().GetTileAt(unit.X, unit.Y).OccupiedByUnit = false;
 
         this.path = path;
-
-        Debug.Log("Cost of path I'm moving on : " + FindObjectOfType<Pathfinding>().GetCostOfPath(path));
+        this.path[path.Count - 1].OccupiedByUnit = true;
+        //Debug.Log("Cost of path I'm moving on : " + Pathfinding.GetCostOfPath(path));
 
         moving = true;
         currentTargetTile = path[0];

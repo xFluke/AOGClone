@@ -3250,6 +3250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barbarian
       objectReference: {fileID: 0}
+    - target: {fileID: 3472835526898649373, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7611456176382843167, guid: ae03de6b88b07e044b23ecc30e30ad87, type: 3}
       propertyPath: x
       value: 4
@@ -4264,7 +4268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 364074244}
   - component: {fileID: 364074243}
-  - component: {fileID: 364074242}
   m_Layer: 0
   m_Name: Automatic Grid
   m_TagString: Untagged
@@ -4272,18 +4275,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &364074242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364074241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0220b0e2dc55f9e46b1b1845e2e6d3ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &364074243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11368,7 +11359,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 207.4
+  orthographic size: 282.42
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11412,12 +11403,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deltaX: 0
   deltaY: 0
-  panSpeed: 0.2
+  panSpeed: 1
   panBorderThickness: 20
-  maxUpDistance: 25
-  maxDownDistance: 20
-  maxLeftDistance: 15
-  maxRightDistance: 20
+  maxUpDistance: 300
+  maxDownDistance: 300
+  maxLeftDistance: 300
+  maxRightDistance: 300
   maxZoom: 0
 --- !u!114 &963194230
 MonoBehaviour:

@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
             Tile tileUnitIsOn = FindObjectOfType<Grid>().GetTileAt(currentlySelectedUnit.X, currentlySelectedUnit.Y);
 
             if (tileUnitIsOn != tileSelected) {
-                List<Tile> path = FindObjectOfType<Pathfinding>().FindPath(tileUnitIsOn, tileSelected);
+                List<Tile> path = Pathfinding.FindPath(grid, tileUnitIsOn, tileSelected);
                 currentlySelectedUnit.GetComponent<UnitMovement>().SetPath(path);
 
                 grid.UnhighlightTiles();
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             GameObject newUnit = Instantiate(unitCollection[UnitNames.BARBARIAN].prefab);
             newUnit.transform.localScale = grid.transform.localScale;
             newUnit.GetComponent<Unit>().SetCoordinates(coordinates.x, coordinates.y);
-            newUnit.GetComponent<Unit>().IsPlayerUnit = true;
+            newUnit.tag = "Player";
 
             onManaChanged.Invoke(mana);
         }

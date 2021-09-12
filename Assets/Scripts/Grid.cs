@@ -148,14 +148,14 @@ public class Grid : MonoBehaviour
 
                 if (!openSet.Contains(neighbour)) {
 
-                    List<Tile> pathToTile = FindObjectOfType<Pathfinding>().FindPath(startingTile, neighbour);
-                    int costOfPath = FindObjectOfType<Pathfinding>().GetCostOfPath(pathToTile);
+                    List<Tile> pathToTile = Pathfinding.FindPath(this, startingTile, neighbour);
+                    int costOfPath = Pathfinding.GetCostOfPath(pathToTile);
 
                     if (costOfPath <= unit.MoveDistance && costOfPath != -1) {
                         openSet.Add(neighbour);
 
                         // If tile is within unit's move distance and is also valid
-                        if (unit.IsPlayerUnit)
+                        if (unit.gameObject.CompareTag("Player"))
                             neighbour.HighlightTile(unitCanMove);
                         else
                             neighbour.HighlightTile(false);
@@ -165,7 +165,7 @@ public class Grid : MonoBehaviour
                     else {
                         closedSet.Add(neighbour);
 
-                        if (unit.IsPlayerUnit && unitCanMove) {
+                        if (unit.gameObject.CompareTag("Player") && unitCanMove) {
                             neighbour.HighlightTile(false);
                             highlightedTiles.Add(neighbour);
                         }
